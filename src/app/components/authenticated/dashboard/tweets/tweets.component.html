@@ -1,0 +1,71 @@
+<div class="container well">
+  <a class="btn btn-success new" routerLink="/dashboard/tweet" style="float: right">New Tweet</a>
+  <h6>See what's
+    <span class="badge rounded-pill text-bg-primary">
+    <a (click)="reloadCurrentRoute()"
+       style="cursor: pointer">New
+    </a>
+  </span>
+  </h6>
+</div>
+<br>
+<ng-container *ngIf="!noTweetsFounds else noTweets">
+  <div *ngFor="let tweet of tweets">
+    <div class="card">
+      <div class="card-header text-bg-success">
+        <a (click)="showTweetsByUser(tweet.username)" class="anchor">@ {{tweet.username}}</a>
+      </div>
+      <div class="card-body">
+        <img alt="avatar" class="card-img" src="assets/avatar.png" style="max-width: 60px">
+        <p class="text-muted" style="float:right">{{tweet.created}}</p>
+        <hr>
+        <p class="card-text">{{tweet.content}}</p>
+        <p style="color: #198754"><b>#{{tweet.tag}}</b></p>
+        <button *ngIf="!likeStatus(tweet)" (click)="likeTweet(tweet.id)" class="like">
+          <i class="fa-solid fa-heart"> {{showLikes(tweet)}}</i>
+        </button>
+        <button *ngIf="likeStatus(tweet)" (click)="dislikeTweet(tweet.id)" class="like">
+          <i class="fa-solid fa-heart-broken"> {{showLikes(tweet)}}</i>
+        </button>
+        <button (click)="updateTweet(tweet)" *ngIf="username===tweet.username" class="edit">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button (click)="onDelete(tweet.id)" *ngIf="username===tweet.username" class="delete">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+      <div class="card-footer text-muted">
+        <ng-container *ngIf="showReplies(tweet) else noReplies">
+          <div *ngFor="let reply of showReplies(tweet)">
+            <p><b>{{reply.username}}</b>: {{reply.replyContent}}</p>
+          </div>
+        </ng-container>
+        <form>
+          <div class="input-group input-group-sm">
+            <input #reply
+                   [(ngModel)]="tweet.replyTyping"
+                   class="form-control"
+                   id="reply" name="reply"
+                   placeholder="add a reply..." type="text">
+            <div class="input-group-btn">
+              <button (click)="replyTweet(tweet.id,reply.value)"
+                      [disabled]="!tweet.replyTyping"
+                      class="btn btn-primary">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br>
+  </div>
+</ng-container>
+
+<ng-template #noTweets>
+  <p><span class="help-block">No Tweets...</span></p>
+</ng-template>
+
+<ng-template #noReplies>
+  <p><span class="help-block">No replies...</span></p>
+</ng-template>

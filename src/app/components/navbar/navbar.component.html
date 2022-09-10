@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-sm bg-success navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/dashboard" style="cursor: pointer">
+      <img alt="Avatar Logo" class="rounded-pill" src="assets/logo.png" style="width:40px;">TweetApp</a>
+    <button class="navbar-toggler" data-bs-target="#collapsibleNavbar" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li *ngIf="loginStatus">
+          <a routerLink="/profile" routerLinkActive="active" class="nav-link welcome" style="cursor: pointer">Welcome, {{username}}</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li *ngIf="!loginStatus" class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" style="cursor: pointer">Home</a>
+        </li>
+        <li *ngIf="loginStatus" class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" style="cursor: pointer">Dashboard</a>
+        </li>
+        <li *ngIf="loginStatus" class="nav-item">
+          <a class="nav-link" routerLink="/users" routerLinkActive="active" style="cursor: pointer">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active" style="cursor: pointer">About</a>
+        </li>
+        <li *ngIf="!loginStatus" class="nav-item">
+          <a class="nav-link" routerLink="/register" routerLinkActive="active" style="cursor: pointer">Register</a>
+        </li>
+        <li *ngIf="loginStatus" class="nav-item">
+          <a (click)="onLogout()" class="nav-link" style="cursor: pointer">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

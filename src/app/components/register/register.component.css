@@ -1,0 +1,7 @@
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, .invalidForm {
+  border: 1px solid red;
+}
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-primary);
+}

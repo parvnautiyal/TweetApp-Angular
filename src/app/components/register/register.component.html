@@ -1,0 +1,74 @@
+<h3>New User Registration</h3>
+<br>
+<form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+  <div class="mb-3">
+    <label class="form-label" for="username">USERNAME
+      <i class="fa-solid fa-circle-info" tooltip="Username should be between 5-21 characters"></i>
+    </label>
+    <input [ngClass]="invalidForm?'invalidForm':null" class="form-control form-control-lg" formControlName="userName"
+           id="username"
+           name="username" type="text"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="firstname">FIRSTNAME
+      <i class="fa-solid fa-circle-info" tooltip="Firstname should not contain spaces"></i>
+    </label>
+    <input [ngClass]="invalidForm?'invalidForm':null" class="form-control form-control-lg" formControlName="firstName"
+           id="firstname" name="firstname"
+           type="text"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="lastname">LASTNAME
+      <i class="fa-solid fa-circle-info" tooltip="Lastname should not contain spaces"></i>
+    </label>
+    <input [ngClass]="invalidForm?'invalidForm':null" class="form-control form-control-lg" formControlName="lastName"
+           id="lastname"
+           name="lastname" type="text"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="email">EMAIL
+      <i class="fa-solid fa-circle-info" tooltip="Enter a valid email address"></i>
+    </label>
+    <input [ngClass]="invalidForm?'invalidForm':null" class="form-control form-control-lg" formControlName="email"
+           id="email"
+           name="email" type="text"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="password">PASSWORD
+      <i class="fa-solid fa-circle-info" tooltip="Choose a strong password"></i>
+    </label>
+    <input [ngClass]="invalidForm?'invalidForm':null" class="form-control form-control-lg" formControlName="password"
+           id="password"
+           name="password"
+           type="password"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="gender">GENDER</label>
+    <select [ngClass]="invalidForm?'invalidForm':null" class="form-select form-select-lg" formControlName="gender"
+            id="gender"
+            name="gender">
+      <option value="male">MALE</option>
+      <option value="female">FEMALE</option>
+      <option value="other">OTHER</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="dob">DATE OF BIRTH</label>
+    <input [ngClass]="invalidForm?'invalidForm':null" class="form-control form-control-lg" formControlName="dob"
+           id="dob"
+           name="dob" type="date"/>
+  </div>
+  <div class="mb-3 form-check">
+    <input class="form-check-input" formControlName="check" id="t&c" type="checkbox">
+    <label [ngClass]="invalidForm?'invalidForm':null" class="form-check-label" for="t&c">I accept the Terms &
+      Conditions</label>
+  </div>
+  <div *ngIf="invalidForm">
+    <p class="form-text">{{errorMessage}}</p>
+  </div>
+  <div class="mb-3">
+    <button [disabled]="!userForm.valid" class="btn btn-success" type="submit">REGISTER</button>
+    &nbsp;
+    <button (click)="resetForm()" class="btn btn-danger" type="button">RESET</button>
+  </div>
+</form>

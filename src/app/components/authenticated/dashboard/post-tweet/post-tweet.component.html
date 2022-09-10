@@ -1,0 +1,21 @@
+<h4>{{editMode ? 'Update a' : 'Add a new'}} Tweet </h4>
+<br>
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]=addForm>
+    <label class="form-label" for="content">{{editMode ? 'Update your thoughts' : "What's on your mind?"}} <i
+      class="fa-solid fa-circle-info"
+      tooltip="Tweet should not exceed 144 characters"></i></label>
+    <textarea class="form-control input-lg" formControlName="content" id="content" name="content" rows="5"></textarea>
+    <br>
+    <label class="form-label" for="tag">Add a tag # <i class="fa-solid fa-circle-info"
+                                                       tooltip="Tag should not exceed 50 characters and Tag cannot be changed"></i></label>
+    <input id="tag" name="tag" class="form-control input-lg" formControlName="tag" [disabled]="editMode"/>
+    <br>
+    <div class="btn-toolbar">
+      <button *ngIf="!editMode" [disabled]="!addForm.valid" class="btn btn-success" type="submit">Add</button>
+      <button *ngIf="editMode" [disabled]="!addForm.valid" class="btn btn-warning" type="submit">Update</button>
+      &nbsp;
+      <button (click)="onCancel()" class="btn btn-danger">Cancel</button>
+    </div>
+  </form>
+</div>

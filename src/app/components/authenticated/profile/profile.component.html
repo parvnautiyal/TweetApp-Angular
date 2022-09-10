@@ -1,0 +1,23 @@
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+  <div class="card p-4">
+    <div class=" image d-flex flex-column justify-content-center align-items-center">
+      <button class="btn btn-secondary"><img src="assets/avatar.png" height="100" width="100"
+                                             style="border-radius: 100px" alt="asset"/></button>
+      <span class="name mt-3">{{user.firstName}} {{user.lastName}}</span> <span class="idd">@{{user.userName}}</span>
+      <div class="text mt-3">
+        <span>
+          <b>Email:</b> {{user.email}}
+          <br>
+          <b>Password:</b> {{user.password}}
+          <br>
+          <b>Date of birth:</b> {{user.dob}}
+          <br>
+          <b>Gender:</b> {{user.gender}}
+          <br>
+          <br>
+          <h6>**This is your profile and kindly note that profile is read-only.**</h6>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

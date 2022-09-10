@@ -1,0 +1,35 @@
+button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+button.like {
+  color: red;
+  border: none;
+}
+
+button.edit {
+  border: 1px solid #999999;
+  color: green;
+  background-color: #cccccc;
+  float: right;
+  margin: -5px 1px 1px;
+}
+
+button.delete {
+  border: 1px solid #999999;
+  color: darkslateblue;
+  background-color: #cccccc;
+  float: right;
+  margin: -5px 1px 1px;
+}
+
+.anchor:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.anchor {
+  color: lightgrey;
+}

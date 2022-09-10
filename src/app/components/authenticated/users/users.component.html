@@ -1,0 +1,37 @@
+<h3>All Users</h3>
+<br>
+<form>
+  <div class="input-group input-group-sm">
+    <input [(ngModel)]="filterString" class="form-control" id="search" name="search" placeholder="search by username..."
+           type="text">
+    <div class="input-group-btn">
+      <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+  </div>
+</form>
+<br>
+<ng-container *ngIf="!noUsers &&  (users | filter:filterString:'userName').length !== 0 ; else elseBlock">
+  <div class="row">
+    <div *ngFor="let user of users | filter:filterString:'userName'" class="col-md">
+      <div class="card cardStyle">
+        <div class="card-header">
+          <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+        </div>
+        <img alt="..." class="card-img-top" src="/assets/avatar.png">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">@{{user.userName}}</h6>
+          <hr>
+          <p class="card-text"><b>Email: </b>{{user.email}}</p>
+          <p class="card-text"><b>Birthday: </b>{{user.dob}}</p>
+          <p class="card-text"><b>Gender: </b>{{user.gender}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #elseBlock>
+  <div>
+    <h6>No Users!</h6>
+  </div>
+</ng-template>

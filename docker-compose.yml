@@ -1,0 +1,150 @@
+version: "3.8"
+
+services:
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - kafka_network
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    expose:
+      - "29092"
+    links:
+      - zookeeper:zookeeper
+    depends_on:
+      - zookeeper
+    networks:
+      - kafka_network
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_CREATE_TOPICS: "tweet-event"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+  elasticsearch:
+    image: elasticsearch:8.3.3
+    container_name: elasticsearch
+    restart: always
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data/:rw
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      discovery.type: single-node
+      xpack.security.enabled: false
+      xpack.security.enrollment.enabled: false
+    ports:
+      - "9200:9200"
+    networks:
+      - kafka_network
+
+  logstash:
+    image: logstash:8.3.3
+    container_name: logstash
+    restart: always
+    volumes:
+      - ./config:/config
+    command: logstash -f /config/logstash.conf
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    ports:
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - kafka_network
+
+  kibana:
+    image: kibana:8.3.3
+    container_name: kibana
+    restart: always
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    networks:
+      - kafka_network
+
+  tweetapp:
+    image: parvnautiyal/tweetapp
+    container_name: tweetapp
+    links:
+      - zookeeper
+      - kafka
+    depends_on:
+      - kafka
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - kafka_network
+    volumes:
+      - ./config:/logs
+    environment:
+      SPRING_KAFKA_BOOTSTRAPSERVERS: kafka:29092
+      MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: true
+      LOGGING_FILE_NAME: ./log/tweetApp.log
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  prometheus:
+    image: prom/prometheus:v2.21.0
+    container_name: prometheus
+    links:
+      - tweetapp
+    depends_on:
+      - tweetapp
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - kafka_network
+
+  grafana:
+    image: grafana/grafana:6.7.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    links:
+      - prometheus
+      - tweetapp
+    networks:
+      - kafka_network
+
+  tweetAppAngular:
+    image: parvnautiyal/tweet-app-angular
+    container_name: tweet-app-angular
+    ports:
+      - "4200:4200"
+    networks:
+      - kafka_network
+    depends_on:
+      - tweetApp
+    links:
+      - tweetapp
+
+volumes:
+  elastic_data:
+
+networks:
+  kafka_network:
+    driver: bridge
