@@ -3,3 +3,9 @@ html {
   position: relative;
   min-height: 100%;
 }
+
+html * {
+  font-family: "Helvetica", sans-serif;
+}
+
+

@@ -17,7 +17,7 @@ import {TooltipModule} from "ng2-tooltip-directive";
 import {TweetsComponent} from './components/authenticated/dashboard/tweets/tweets.component';
 import {PostTweetComponent} from './components/authenticated/dashboard/post-tweet/post-tweet.component';
 import {ErrorPageComponent} from './components/error-page/error-page.component';
-import { ProfileComponent } from './components/authenticated/profile/profile.component';
+import {ProfileComponent} from './components/authenticated/profile/profile.component';
 
 @NgModule({
   declarations: [

@@ -9,7 +9,7 @@
     <br>
     <label class="form-label" for="tag">Add a tag # <i class="fa-solid fa-circle-info"
                                                        tooltip="Tag should not exceed 50 characters and Tag cannot be changed"></i></label>
-    <input id="tag" name="tag" class="form-control input-lg" formControlName="tag" [disabled]="editMode"/>
+    <input [disabled]="editMode" class="form-control input-lg" formControlName="tag" id="tag" name="tag"/>
     <br>
     <div class="btn-toolbar">
       <button *ngIf="!editMode" [disabled]="!addForm.valid" class="btn btn-success" type="submit">Add</button>

@@ -36,8 +36,8 @@ describe('HttpService', () => {
     req.flush(mockUserArray);
   });
 
-  it('should call getUser and return the user',  () =>{
-    service.getUser("user").subscribe((res)=>{
+  it('should call getUser and return the user', () => {
+    service.getUser("user").subscribe((res) => {
       expect(res.body).toEqual(mockUser1);
     });
 
@@ -181,7 +181,7 @@ describe('HttpService', () => {
 
   it('should call putTweet and return updated tweet', () => {
 
-    const updatedTweet: Tweet = new Tweet('tweet1', 'username1', 'content updated',"tag", new Date("2022-08-02"), null, null);
+    const updatedTweet: Tweet = new Tweet('tweet1', 'username1', 'content updated', "tag", new Date("2022-08-02"), null, null);
 
     service.putTweet(mockTweet1.username, mockTweet1.id, updatedTweet).subscribe(res => {
       expect(res.body).toEqual(updatedTweet);

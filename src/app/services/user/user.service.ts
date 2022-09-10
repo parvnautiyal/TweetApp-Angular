@@ -26,7 +26,7 @@ export class UserService {
     return this.http.getAllUsers();
   }
 
-  showUser(username:string){
+  showUser(username: string) {
     return this.http.getUser(username);
   }
 }

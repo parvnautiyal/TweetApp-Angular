@@ -21,17 +21,17 @@
         <hr>
         <p class="card-text">{{tweet.content}}</p>
         <p style="color: #198754"><b>#{{tweet.tag}}</b></p>
-        <button *ngIf="!likeStatus(tweet)" (click)="likeTweet(tweet.id)" class="like">
+        <button (click)="likeTweet(tweet.id)" *ngIf="!likeStatus(tweet)" class="like">
           <i class="fa-solid fa-heart"> {{showLikes(tweet)}}</i>
         </button>
-        <button *ngIf="likeStatus(tweet)" (click)="dislikeTweet(tweet.id)" class="like">
-          <i class="fa-solid fa-heart-broken"> {{showLikes(tweet)}}</i>
+        <button (click)="dislikeTweet(tweet.id)" *ngIf="likeStatus(tweet)" class="like">
+          <i class="fa-solid fa-heart-crack"> {{showLikes(tweet)}}</i>
         </button>
         <button (click)="updateTweet(tweet)" *ngIf="username===tweet.username" class="edit">
-          <i class="fa-solid fa-pen-to-square"></i>
+          <i class="fa-regular fa-pen-to-square"></i>
         </button>
         <button (click)="onDelete(tweet.id)" *ngIf="username===tweet.username" class="delete">
-          <i class="fa-solid fa-trash"></i>
+          <i class="fa-solid fa-circle-minus"></i>
         </button>
       </div>
       <div class="card-footer text-muted">

@@ -8,7 +8,8 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li *ngIf="loginStatus">
-          <a routerLink="/profile" routerLinkActive="active" class="nav-link welcome" style="cursor: pointer">Welcome, {{username}}</a>
+          <a class="nav-link welcome" routerLink="/profile" routerLinkActive="active"
+             style="cursor: pointer">Welcome, {{username}}</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

@@ -109,7 +109,7 @@ describe('PostTweetComponent', () => {
     activatedRoute.queryParams = of({editMode: 'true'});
     component.addForm.setValue({
       content: '',
-      tag:''
+      tag: ''
     });
     component.onSubmit();
     tick(100);

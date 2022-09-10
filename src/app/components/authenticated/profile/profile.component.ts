@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
 import {User} from "../../../shared/models/user/user";
 
@@ -9,16 +9,17 @@ import {User} from "../../../shared/models/user/user";
 })
 export class ProfileComponent implements OnInit {
 
-  user:User;
+  user: User;
 
-  constructor(private userService:UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.userService.showUser(localStorage.getItem("token")).subscribe({
-      next:res=>{
+      next: res => {
         this.user = res.body;
       },
-      error:error=>{
+      error: error => {
         console.error(error);
       }
     })

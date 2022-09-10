@@ -7,7 +7,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
 import {of, throwError} from "rxjs";
 import {
-  deleteTweetSuccessResponse, dislikeTweetSuccessResponse,
+  deleteTweetSuccessResponse,
+  dislikeTweetSuccessResponse,
   likeTweetSuccessResponse,
   replyTweetSuccessResponse
 } from "../../../../../mocks/mockResponses";

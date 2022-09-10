@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:80/api/v1.0/tweets/'
+  baseUrl: 'http://localhost:80/api/v1.0/tweets/',
+  swagger: 'http://localhost:80/swagger-ui/'
 };
 
 /*

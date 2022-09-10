@@ -5,22 +5,20 @@ button:disabled {
 }
 
 button.like {
-  color: red;
+  color: blue;
   border: none;
 }
 
 button.edit {
   border: 1px solid #999999;
-  color: green;
-  background-color: #cccccc;
+  color: forestgreen;
   float: right;
   margin: -5px 1px 1px;
 }
 
 button.delete {
   border: 1px solid #999999;
-  color: darkslateblue;
-  background-color: #cccccc;
+  color: red;
   float: right;
   margin: -5px 1px 1px;
 }
